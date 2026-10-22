@@ -1,3 +1,4 @@
+//Hi sensei!
 int totalCalls = 0;
 
 void greet() {
