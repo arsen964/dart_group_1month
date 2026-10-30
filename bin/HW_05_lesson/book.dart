@@ -4,6 +4,7 @@ class Book {
   double _rating;
 
   Book(this._title, this._author) : _rating = 0;
+ 
   Book.withRating(this._title, this._author, this._rating) {
     if (_rating < 0 || _rating > 10) {
       _rating = 0;
