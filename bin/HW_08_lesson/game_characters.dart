@@ -9,6 +9,7 @@ enum SuperAbility {
   dodge,
   resurrect,
   stun,
+  diceRoll,
 }
 
 abstract class GameCharacter {
@@ -235,6 +236,48 @@ class Thor extends Hero {
     if (RpgGame.random.nextBool()) {
       boss.isStunned = true;
       print('$name Stunned Boss');
+    }
+  }
+}
+
+class Ludoman extends Hero {
+  Ludoman(String name, int health, int damage)
+    : super(name, health, damage, SuperAbility.diceRoll);
+
+  @override
+  void applySuperPower(Boss boss, List<Hero> heroes) {
+    int dice1 = RpgGame.random.nextInt(6) + 1;
+    int dice2 = RpgGame.random.nextInt(6) + 1;
+
+    print('$name rolls two dice: $dice1 and $dice2');
+
+    if (dice1 == dice2) {
+      int damage = dice1 * dice2;
+      boss.health -= damage;
+
+      print('The numbers match!');
+      print('$name dealt $damage damage to the Boss.');
+    } else {
+      List<Hero> aliveHeroes = [];
+
+      for (Hero h in heroes) {
+        if (h.isAlive() && h != this) {
+          aliveHeroes.add(h);
+        }
+      }
+
+      if (aliveHeroes.isEmpty) {
+        print('There are no allies to attack!');
+        return;
+      }
+
+      Hero randomHero = aliveHeroes[RpgGame.random.nextInt(aliveHeroes.length)];
+
+      int damage = dice1 + dice2;
+      randomHero.health -= damage;
+
+      print('The numbers do not match!');
+      print('$name dealt $damage damage to ${randomHero.name}.');
     }
   }
 }

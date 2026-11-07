@@ -18,7 +18,8 @@ class RpgGame {
     Golem golem = Golem('Frank', 300, 5);
     Lucky lucky = Lucky('Spinner', 240, 10);
     Witcher witcher = Witcher('Geralt', 200, 0);
-    Thor thor = Thor('Thor', 200, 20);
+    Thor thor = Thor('Ragnarek', 200, 20);
+    Ludoman ludoman = Ludoman('Peter Parker', 200, 15);
 
     List<Hero> heroes = [
       warrior1,
@@ -31,6 +32,7 @@ class RpgGame {
       lucky,
       witcher,
       thor,
+      ludoman
     ];
 
     _showStatistics(boss, heroes);
